@@ -53,4 +53,9 @@ public class Attrezzo {
 		Attrezzo that = (Attrezzo)o;
 		return (this.getNome().equals(that.getNome())) && (this.getPeso()==that.getPeso());
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode() + this.getPeso();
+	}
 }

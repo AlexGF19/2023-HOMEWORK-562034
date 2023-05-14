@@ -1,6 +1,8 @@
 package it.uniroma3.diadia.comandi;
 
 
+import java.util.HashMap;
+
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -8,7 +10,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class ComandoPrendi implements Comando {
 	private String nomeAttrezzo; 
 	private IO io;
-	
+
 	public ComandoPrendi(IO io) {
 		this.io = io;
 	}
@@ -23,12 +25,9 @@ public class ComandoPrendi implements Comando {
 				this.io.mostraMessaggio("La stanza è vuota.");
 			else {	
 				if(partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo)) {
-					Attrezzo[] attrezzi=partita.getStanzaCorrente().getAttrezzi();
-					int i=0;
-					while((!(attrezzi[i].getNome().equals(nomeAttrezzo)))&&(i<numeroAttrezzi))
-						i++;
-					partita.getGiocatore().getBorsa().addAttrezzo(attrezzi[i]);
-					partita.getStanzaCorrente().removeAttrezzo(attrezzi[i]);
+					Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzi().get(nomeAttrezzo);
+					partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
+					partita.getStanzaCorrente().removeAttrezzo(attrezzo);
 					this.io.mostraMessaggio("Hai raccolto :"+ nomeAttrezzo);
 				}
 				else {

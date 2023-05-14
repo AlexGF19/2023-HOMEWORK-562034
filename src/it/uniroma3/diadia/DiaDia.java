@@ -3,6 +3,8 @@ package it.uniroma3.diadia;
 
 import java.util.Scanner;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -41,6 +43,10 @@ public class DiaDia {
 		this.io = io;
 	}
 	
+	public DiaDia(Labirinto labirinto, IO io) {
+		this.partita = new Partita(labirinto);
+		this.io = io;
+	}
 
 	public void gioca() {
 
@@ -71,7 +77,38 @@ public class DiaDia {
 	
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		LabirintoBuilder l = new LabirintoBuilder();
+		l.addStanzaVincente("Biblioteca");
+		l.addStanzaIniziale("Atrio");
+		l.addAttrezzo("osso", 1);
+		l.addAttrezzo("chiave", 2);
+		l.addStanza("Aula N11");
+		l.addStanza("Aula N10");
+		l.addAttrezzo("lanterna", 3);
+		l.addStanza("Laboratorio Campus");
+		l.addStanzaMagica("Magica");
+		l.addStanzaBloccata("Bloccata", "chiave", "ovest");
+		l.addStanzaBuia("Buia", "lanterna");
+		l.addAdiacenza("Atrio", "Biblioteca", "nord");
+		l.addAdiacenza("Atrio", "Aula N11", "est");
+		l.addAdiacenza("Atrio", "Laboratorio Campus", "ovest");
+		l.addAdiacenza("Atrio", "Aula N10", "sud");
+		l.addAdiacenza("Aula N11", "Laboratorio Campus", "est");
+		l.addAdiacenza("Aula N11", "Atrio", "ovest");
+		l.addAdiacenza("Aula N10", "Atrio", "nord");
+		l.addAdiacenza("Aula N10", "Aula N11", "est");
+		l.addAdiacenza("Aula N10", "Laboratorio Campus", "ovest");
+		l.addAdiacenza("Aula N10", "Bloccata", "sud");
+		l.addAdiacenza("Laboratorio Campus", "Atrio", "est");
+		l.addAdiacenza("Laboratorio Campus", "Aula N11", "ovest");
+		l.addAdiacenza("Biblioteca", "Atrio", "sud");
+		l.addAdiacenza("Bloccata", "Aula N10", "nord");
+		l.addAdiacenza("Bloccata", "Buia", "est");
+		l.addAdiacenza("Bloccata", "Magica", "ovest");
+		l.addAdiacenza("Magica", "Bloccata", "est");
+		l.addAdiacenza("Buia", "Bloccata", "ovest");
+		
+		DiaDia gioco = new DiaDia(l.getLabirinto(), io);
 		gioco.gioca();
 	}
 

@@ -20,8 +20,8 @@ public class StanzaBloccata extends Stanza {
 	
 	@Override
 	public String getDescrizione() {
-		String s = "Non puoi andare verso " + this.direzioneBloccata + ", la pora è bloccata!\n";
-		String ss = "Ti serve *" + this.chiave + "* per poterla aprire.";
+		String s = "\nNon puoi andare verso " + this.direzioneBloccata + ", la porta è bloccata!\n";
+		String ss = "Ti serve posare :*" + this.chiave + "* per poterla aprire.";
 		return super.getDescrizione() + s + ss ;
 	}
 }
