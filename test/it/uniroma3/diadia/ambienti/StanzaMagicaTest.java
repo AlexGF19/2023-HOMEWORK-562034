@@ -30,7 +30,7 @@ class StanzaMagicaTest {
 			stanza.addAttrezzo(attrezzo);
 		}
 		stanza.addAttrezzo(attrezzo);
-		assertEquals("ozzertta", stanza.getAttrezzi()[i].getNome());
-		assertEquals("attrezzo", stanza.getAttrezzi()[i-1].getNome());
+		assertTrue(stanza.getAttrezzi().containsKey("ozzertta"));
+		assertTrue(stanza.getAttrezzi().containsKey("attrezzo"));
 	}
 }
