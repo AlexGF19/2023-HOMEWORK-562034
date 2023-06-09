@@ -26,11 +26,11 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 
 
 	@Override
-	public Comando costruisciComando(String istruzione) {
+	public AbstractComando costruisciComando(String istruzione) {
 		
 		Scanner scannerDiParole = new Scanner(istruzione);
 		
-		Comando comando = null;
+		AbstractComando comando = null;
 		
 		if (scannerDiParole.hasNext())
 			nomeComando = scannerDiParole.next();// prima parola: nome del comando
@@ -51,7 +51,9 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 			comando = new ComandoFine(this.io);
 		else if (nomeComando.equals("guarda"))
 			comando = new ComandoGuarda(this.io);
-		else comando = new ComandoNonValido(this.io, nomeComando);
+		else { comando = new ComandoNonValido(this.io);
+				comando.setParametro(nomeComando);
+			}
 		comando.setParametro(parametro);
 
 		return comando;

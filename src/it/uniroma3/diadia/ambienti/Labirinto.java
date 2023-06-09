@@ -7,8 +7,7 @@ public class Labirinto {
 	private Stanza stanzaVincente;
 	private Stanza stanzaIniziale;
 	
-	public Labirinto () {
-	}
+	public Labirinto () {}
 	
 	public Stanza getStanzaVincente() {
 		return stanzaVincente;

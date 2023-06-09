@@ -66,6 +66,7 @@ public class LabirintoBuilder  {
 			s1.impostaStanzaAdiacente(direzione, s2);
 	}
 	
+	/*L'attrezzo viene inserito nell'ultima stanza inserita*/
 	public void addAttrezzo(String nomeAttrezzo, int peso) {
 		Attrezzo a = new Attrezzo(nomeAttrezzo, peso);
 		if(this.stanzaCorrente!=null)

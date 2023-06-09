@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 class ComandoVaiTest {
@@ -15,7 +16,17 @@ class ComandoVaiTest {
 
 	@BeforeEach
 	 void setUp() {
-		this.partita = new Partita();
+		LabirintoBuilder l = new LabirintoBuilder();
+		l.addStanzaVincente("Biblioteca");
+		l.addStanzaIniziale("Atrio");
+		l.addStanza("Aula N11");
+		l.addStanza("Aula N10");
+		l.addStanza("Laboratorio Campus");
+		l.addAdiacenza("Atrio", "Biblioteca", "nord");
+		l.addAdiacenza("Atrio", "Aula N11", "est");
+		l.addAdiacenza("Atrio", "Laboratorio Campus", "ovest");
+		l.addAdiacenza("Atrio", "Aula N10", "sud");
+		this.partita = new Partita(l.getLabirinto());
 		this.cvai = new ComandoVai(new IOConsole());
 	}
 	
